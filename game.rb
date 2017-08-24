@@ -34,7 +34,9 @@ def game
   i=0
   while(i<10)
     p $maru
-    # for()
+    $table.each do |elm1, elm2, elm3|
+        output(elm1, elm2, elm3) 
+    end
     $maru=!$maru
     i+=1
   end
@@ -42,7 +44,5 @@ end
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 puts("○×ゲームを始めます")
-$table.each do |elm1, elm2, elm3|
-    output(elm1, elm2, elm3) 
-  end
+
 game()
