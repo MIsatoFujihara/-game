@@ -3,7 +3,7 @@
 
 # tableの添え字を場所に振られた数字に変える
 def index_number(x,y)
-  return y+1+(x)*3;
+  return x+1+(y)*3;
 end
 
 def number_index(num)
@@ -35,9 +35,9 @@ def output(i,*pos)
   j=0
   pos.each do |mark|
     if(mark==1)
-      print(" ○ ")
+      print(" ○")
     elsif(mark==2)
-      print(" × ")
+      print(" ×")
     else
       print(" #{index_number(i,j)} ")
    end
@@ -70,6 +70,12 @@ def call_Set(num)
   if (pos.check_position==false)
     puts("もう一度入力してください")
     input()
+  else
+    if($maru==true)
+      $table[y][x]=1
+    else
+      $table[y][x]=2
+    end
   end
 end
 
@@ -92,5 +98,6 @@ end
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 x=0
+call_output()
 puts("○×ゲームを始めます")
 game()
