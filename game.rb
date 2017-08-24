@@ -19,23 +19,18 @@ class ClearCheck
     @i=i
   end
   def naname
-    puts("naname")
     clear=0
     while($table[@j][@i]==maru_state()) do
       clear+=1
-      puts clear
       return 1 if(clear>2)
-      puts "hello"
       @i+=1
       @j+=1
     end
     return 0
   end
   def tate
-    puts("tate")
     clear=0
     while($table[@j][@i]==maru_state()) do
-      puts clear
       clear+=1
       return 1 if(clear>2)
       @j+=1
@@ -43,7 +38,6 @@ class ClearCheck
     return 0
   end
   def yoko
-    puts("tate")
     clear=0
     while($table[@j][@i]==maru_state()) do
       clear+=1
