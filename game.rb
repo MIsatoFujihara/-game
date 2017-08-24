@@ -6,6 +6,12 @@ def index_number(x,y)
   return y+1+(x)*3;
 end
 
+def number_index(num)
+  x=(num-1)/3
+  y=(num-1)%3
+  return x,y
+end
+
 class Input
   def initialize(x, y)
     @x=x
@@ -60,8 +66,8 @@ def game
   i=0
   while(i<10)
     print("入力>")
-    x=gets.to_i
-    p $maru
+    num=gets.to_i
+    #p $maru
     call_output()
     $maru=!$maru
     i+=1
