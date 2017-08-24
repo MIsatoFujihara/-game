@@ -14,7 +14,27 @@ def maru_state
   end
 end
 
-
+def clearCheck(j,i)
+  check=maru_state()
+  if($clear_naname>3)
+    return 1;
+  end
+  # 斜めを確認
+  if($table[j+1][i+1]==check)
+    $clear_naname+=1
+    clearCheck(i+1,j+1)
+  elsif($table[j+1][i]==check)
+    # 縦を確認
+    $clear_tate+=1
+    clearCheck(j+1,i)
+  elsif($table[j][i+1]==check)
+    $clear_yoko+=1
+    clearCheck(j,i+1)
+  else
+    return 0;
+  end
+end
+ 
 def number_index(num)
   x=(num-1)%3
   y=(num-1)/3
@@ -96,11 +116,15 @@ def game
     call_output()
     $maru=!$maru
     i+=1
+    #break if(clearCheck(0,0)==1)
   end
 end
 
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
+$clear_naname=0 #clearかどうかの判定に使う
+$clear_yoko=0 #clearかどうかの判定に使う
+$clear_tate=0 #clearかどうかの判定に使う
 x=0
 call_output()
 puts("○×ゲームを始めます")
