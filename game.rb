@@ -65,13 +65,13 @@ class ClearCheck
 end
 
  # 3つそろっていたら１,そうでなければ0を返す関数
+ # ClearCheckクラスを扱う
 def callClear
   # table[0][0]は縦横斜め方向にそろっているかを調べる
   check=ClearCheck.new(0,0)
   if(check.naname()==1||check.yoko()==1||check.tate()==1)
     return 1
   end
-  
   check2=ClearCheck.new(1,0)
   check3=ClearCheck.new(2,0)
   check4=ClearCheck.new(0,1)
