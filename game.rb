@@ -124,7 +124,7 @@ class Set_position
     end
   end
 end
-# output
+# 各要素の表示
 def output(i,j,mark)
   if(mark==1)
     print(" ○")
@@ -133,17 +133,17 @@ def output(i,j,mark)
   else
     print(" #{index_number(j,i)} ")
  end
+ if((j+1)%3!=0)
+  print("｜")
+ end
 end
 
-# tableの行単位の出力
+# tableの行単位に制御
 def output_loop(i,*pos)
   print(" ")
   j=0
   pos.each do |mark|
     output(i,j,mark)
-    if((j+1)%3!=0)
-     print("｜")
-    end
     j+=1
   end
   print("\n")
