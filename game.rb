@@ -3,7 +3,7 @@
 
 # tableの添え字を場所に振られた数字に変える
 def index_number(x,y)
-  return y+1+(x+1)*3;
+  return y+1+(x)*3;
 end
 
 class Input
@@ -22,23 +22,26 @@ class Input
 end
 
 def output(i,*pos)
-  print i
+  
+  j=0
   pos.each do |mark|
-    print("|")
+    
     if(mark==1)
       print("○")
     elsif(mark==2)
       print("×")
     else
-      print(" ")
+      print("#{index_number(i,j)}")
    end
+   print("|")
+   j+=1
   end
-  print("|\n")
+  print("\n")
 end
 
 def call_output
-  i=1
-  print("  1 2 3\n")
+  i=0
+  
   $table.each do |elm1, elm2, elm3|
     output(i,elm1, elm2, elm3) 
     i+=1
