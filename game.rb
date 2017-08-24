@@ -219,11 +219,9 @@ def game
   end
 end
 
-
-
-$table = Array.new(3).map{Array.new(3,0)}
-$maru=true
-x=0
+# main
+$table = Array.new(3).map{Array.new(3,0)}  #グローバル変数
+$maru=true # 今の手が○ならtrue，×ならfalseを示す
 call_output()
 puts("○×ゲームを始めます")
 game()
