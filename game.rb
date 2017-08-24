@@ -13,51 +13,72 @@ def maru_state
     return 2
   end
 end
-
-def clearCheck(j,i)
-  clear_naname=0
-  clear_tate=0
-  clear_yoko=0
-  # 今の状態を保存
-  old_i,old_j=i,j
-  # 斜めを確認
-  while($table[j][i]==maru_state()) do
-    clear_naname+=1
-    return 1 if(clear_naname>2)
-    i+=1
-    j+=1
+class ClearCheck
+  def initialize(j,i)
+    @j=j
+    @i=i
   end
-  i,j=old_i,old_j
-  while($table[j][i]==maru_state()) do
-    # 縦を確認
-    clear_tate+=1
-    return 1 if(clear_tate>2)
-    j+=1
+  def naname
+    puts("naname")
+    clear=0
+    while($table[@j][@i]==maru_state()) do
+      clear+=1
+      puts clear
+      return 1 if(clear>2)
+      puts "hello"
+      @i+=1
+      @j+=1
+    end
+    return 0
   end
-  i,j=old_i,old_j
-  while($table[j][i]==maru_state()) do
-    clear_yoko+=1
-    return 1 if(clear_yoko>2)
-    i+=1
+  def tate
+    puts("tate")
+    clear=0
+    while($table[@j][@i]==maru_state()) do
+      puts clear
+      clear+=1
+      return 1 if(clear>2)
+      @j+=1
+    end
+    return 0
   end
-  return 0
+  def yoko
+    puts("tate")
+    clear=0
+    while($table[@j][@i]==maru_state()) do
+      clear+=1
+      return 1 if(clear>2)
+      @i+=1
+    end
+    return 0
+  end
 end
+
  
 def callClear
-  i=0
-  while(i<3) do
-    if($table[0][i]==maru_state())
-      if(clearCheck(0,i)==1)
-        return 1
-      end
-    elsif($table[i][0]==maru_state())
-      if(clearCheck(i,0)==1)
-        return 1
-      end
-    end
-    i+=1
+  i=1
  
+  check=ClearCheck.new(0,0)
+  if(check.naname()==1||check.yoko()==1||check.tate()==1)
+    return 1
   end
+  check2=ClearCheck.new(1,0)
+  check3=ClearCheck.new(2,0)
+  check4=ClearCheck.new(0,1)
+  check5=ClearCheck.new(0,2)
+  if(check2.yoko()==1)
+    return 1
+  end
+  if(check3.yoko()==1)
+    return 1
+  end
+  if(check4.tate()==1)
+    return 1
+  end
+  if(check5.tate()==1)
+    return 1
+  end
+
   return 0
 end
     
@@ -147,9 +168,13 @@ def game
   end
 end
 
+def clear
+  puts("winner>#{maru_state()}")
+end
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 x=0
 call_output()
 puts("○×ゲームを始めます")
 game()
+clear()
