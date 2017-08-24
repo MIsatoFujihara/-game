@@ -19,6 +19,9 @@ class Input
   end
   # その場所におけるか確認
   def check_position
+    if(@y>2||@x>2)
+      return false
+    end
     if (table[@y][@x]==0)
         return true
     else
