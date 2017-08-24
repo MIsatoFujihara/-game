@@ -1,6 +1,12 @@
 # encoding: UTF-8
 # 入出力関数の作成
-class Set_position
+
+# tableの添え字を場所に振られた数字に変える
+def index_number(x,y)
+  return y+1+(x+1)*3;
+end
+
+class Input
   def initialize(x, y)
     @x=x
     @y=y
@@ -44,6 +50,7 @@ def game
   i=0
   while(i<10)
     print("入力>")
+    x=gets.to_i
     p $maru
     call_output()
     $maru=!$maru
@@ -55,4 +62,5 @@ $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 x=0
 puts("○×ゲームを始めます")
+
 game()
