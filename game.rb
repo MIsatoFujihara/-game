@@ -61,6 +61,10 @@ def call_output
   end
 end
 
+def call_input
+  x,y=number_index(num)
+  input=Input(x,y)
+end
 
 def game
   i=0
