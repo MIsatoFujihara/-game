@@ -15,24 +15,31 @@ def maru_state
 end
 
 def clearCheck(j,i)
-  check=maru_state()
-  if($clear_naname>3)
-    return 1;
-  end
+  clear_naname=0
+  clear_tate=0
+  clear_yoko=0
+  old_i,old_j=i,j
   # 斜めを確認
-  if($table[j+1][i+1]==check)
-    $clear_naname+=1
-    clearCheck(i+1,j+1)
-  elsif($table[j+1][i]==check)
-    # 縦を確認
-    $clear_tate+=1
-    clearCheck(j+1,i)
-  elsif($table[j][i+1]==check)
-    $clear_yoko+=1
-    clearCheck(j,i+1)
-  else
-    return 0;
+  while($table[j][i]==maru_state()) do
+    clear_naname+=1
+    return 1 if(clear_naname>2)
+    i+=1
+    j+=1
   end
+  i,j=old_i,old_j
+  while($table[j][i]==maru_state()) do
+    # 縦を確認
+    clear_tate+=1
+    return 1 if(clear_tate>2)
+    j+=1
+  end
+  i,j=old_i,old_j
+  while($table[j][i]==maru_state()) do
+    clear_yoko+=1
+    return 1 if(clear_yoko>2)
+    i+=1
+  end
+  return 0
 end
  
 def callClear
@@ -43,13 +50,14 @@ def callClear
         return 1
       end
     elsif($table[i][0]==maru_state())
-        if(clearCheck(i,0)==1)
-          return 1
-        end
-    else
-      i+=1
+      if(clearCheck(i,0)==1)
+        return 1
+      end
     end
+    i+=1
+ 
   end
+  return 0
 end
     
 
@@ -132,17 +140,14 @@ def game
   while(i<10)
     input()
     call_output()
-    $maru=!$maru
     i+=1
-    #break if(clearCheck(0,0)==1)
+    break if(callClear==1)
+    $maru=!$maru
   end
 end
 
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
-$clear_naname=0 #clearかどうかの判定に使う
-$clear_yoko=0 #clearかどうかの判定に使う
-$clear_tate=0 #clearかどうかの判定に使う
 x=0
 call_output()
 puts("○×ゲームを始めます")
