@@ -77,11 +77,7 @@ def call_Set(num)
     puts("もう一度入力してください")
     input()
   else
-    if($maru==true)
-      $table[y][x]=1
-    else
-      $table[y][x]=2
-    end
+    $table[y][x]=maru_state()
   end
 end
 
