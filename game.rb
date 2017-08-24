@@ -6,6 +6,15 @@ def index_number(x,y)
   return x+1+(y)*3;
 end
 
+def maru_state
+  if($maru==true)
+    return 1
+  else
+    return 2
+  end
+end
+
+
 def number_index(num)
   x=(num-1)%3
   y=(num-1)/3
