@@ -29,6 +29,17 @@ class ClearCheck
     end
     return 0
   end
+  def naname2
+    i,j=@i,@j
+    clear=0
+    while($table[j][i]==maru_state()) do
+      clear+=1
+      return 1 if(clear>2)
+      i+=1
+      j-=1
+    end
+    return 0
+  end
   # 縦方向にそろっているか確認
   def tate
     i,j=@i,@j
@@ -69,7 +80,7 @@ def callClear
   if(check2.yoko()==1)
     return 1
   end
-  if(check3.yoko()==1)
+  if(check3.yoko()==1||check3.naname2()==1)
     return 1
   end
   # table[0][1],tanle[0][2]は縦方向にそろっているか調べる
@@ -104,6 +115,7 @@ class Set_position
     @y=y
   end
   # その場所におけるか確認
+  # 置けたらtrue，置けなかったらfalseを返す
   def check_position
     if ($table[@y][@x]==0)
         return true
@@ -112,22 +124,27 @@ class Set_position
     end
   end
 end
+# output
+def output(i,j,mark)
+  if(mark==1)
+    print(" ○")
+  elsif(mark==2)
+    print(" ×")
+  else
+    print(" #{index_number(j,i)} ")
+ end
+end
 
-def output(i,*pos)
+# tableの行単位の出力
+def output_loop(i,*pos)
   print(" ")
   j=0
   pos.each do |mark|
-    if(mark==1)
-      print(" ○")
-    elsif(mark==2)
-      print(" ×")
-    else
-      print(" #{index_number(j,i)} ")
-   end
-   if((j+1)%3!=0)
-    print("｜")
-   end
-   j+=1
+    output(i,j,mark)
+    if((j+1)%3!=0)
+     print("｜")
+    end
+    j+=1
   end
   print("\n")
   if((i+1)%3!=0)
@@ -137,12 +154,12 @@ def output(i,*pos)
   end
 end
 
+# tableの出力を列ごとに制御
 def call_output
   i=0
   print("\n")
   $table.each do |elm1, elm2, elm3|
-    
-    output(i,elm1, elm2, elm3) 
+    output_loop(i,elm1, elm2, elm3) 
     i+=1
   end
 end
@@ -154,7 +171,6 @@ def call_Set(num)
     puts("もう一度入力してください")
     input()
   else
-    p x,y
     $table[y][x]=maru_state()
   end
 end
