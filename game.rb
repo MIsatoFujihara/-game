@@ -16,8 +16,14 @@ class Input
   end
 end
 
-def output
-  
+def output(pos)
+  if(pos==1)
+    print("○")
+  elsif(pos==0)
+    print("×")
+  else
+    print(" ")
+  end
 end
 
 def game
