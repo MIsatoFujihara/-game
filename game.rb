@@ -69,13 +69,16 @@ def call_Set(num)
   input=Set_position.new(x,y)
 end
 
+def input
+  print("入力>")
+  num=gets.to_i
+  call_Set(num)
+end
+
 def game
   i=0
   while(i<10)
-    print("入力>")
-    num=gets.to_i
-    call_Set(num)
-    #p $maru
+    input()
     call_output()
     $maru=!$maru
     i+=1
