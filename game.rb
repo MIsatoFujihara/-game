@@ -18,6 +18,7 @@ def clearCheck(j,i)
   clear_naname=0
   clear_tate=0
   clear_yoko=0
+  # 今の状態を保存
   old_i,old_j=i,j
   # 斜めを確認
   while($table[j][i]==maru_state()) do
