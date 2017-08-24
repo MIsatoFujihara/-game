@@ -61,9 +61,9 @@ def call_output
   end
 end
 
-def call_input
+def call_input(num)
   x,y=number_index(num)
-  input=Input(x,y)
+  input=Input.new(x,y)
 end
 
 def game
@@ -71,6 +71,7 @@ def game
   while(i<10)
     print("入力>")
     num=gets.to_i
+    call_input(num)
     #p $maru
     call_output()
     $maru=!$maru
@@ -82,5 +83,4 @@ $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 x=0
 puts("○×ゲームを始めます")
-
 game()
