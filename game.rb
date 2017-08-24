@@ -13,6 +13,7 @@ def maru_state
     return 2
   end
 end
+
 class ClearCheck
   def initialize(j,i)
     @j=j
@@ -151,24 +152,39 @@ def input
   call_Set(num)
 end
 
+def clear
+  print("winner>")
+  puts $maru==true ? "○\n":"×\n"
+end
+
+def gameOver
+  puts("gameover")
+end
+
 def game
   i=0
-  while(i<10)
+  while(1) do
     input()
     call_output()
     i+=1
-    break if(callClear==1)
+    if(callClear==1)
+      clear()
+      break
+    end
+    if(i>=9)
+      gameOver()
+      break
+    end
     $maru=!$maru
   end
+  
 end
 
-def clear
-  puts("winner>#{maru_state()}")
-end
+
+
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 x=0
 call_output()
 puts("○×ゲームを始めます")
 game()
-clear()
