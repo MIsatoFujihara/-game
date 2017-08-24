@@ -35,6 +35,24 @@ def clearCheck(j,i)
   end
 end
  
+def callClear
+  i=0
+  while(i<3) do
+    if($table[0][i]==maru_state())
+      if(clearCheck(0,i)==1)
+        return 1
+      end
+    elsif($table[i][0]==maru_state())
+        if(clearCheck(i,0)==1)
+          return 1
+        end
+    else
+      i+=1
+    end
+  end
+end
+    
+
 def number_index(num)
   x=(num-1)%3
   y=(num-1)/3
