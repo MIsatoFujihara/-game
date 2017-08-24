@@ -16,20 +16,25 @@ class Input
   end
 end
 
-def output(pos)
-  if(pos==1)
-    print("○")
-  elsif(pos==0)
-    print("×")
-  else
-    print(" ")
+def output(*pos)
+  pos.each do |mark|
+    print("|")
+    if(mark==1)
+      print("○")
+    elsif(mark==2)
+      print("×")
+    else
+      print(" ")
+   end
   end
+  print("|\n")
 end
 
 def game
   i=0
   while(i<10)
     p $maru
+    # for()
     $maru=!$maru
     i+=1
   end
@@ -37,4 +42,7 @@ end
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 puts("○×ゲームを始めます")
+$table.each do |elm1, elm2, elm3|
+    output(elm1, elm2, elm3) 
+  end
 game()
