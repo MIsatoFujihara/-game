@@ -164,6 +164,8 @@ def call_output
   end
 end
 
+# Set_positioinクラスのインスタンスを扱う関数
+# 入力に関する制御を行う
 def call_Set(num)
   x,y=number_index(num)
   pos=Set_position.new(x,y)
@@ -175,6 +177,7 @@ def call_Set(num)
   end
 end
 
+# 入力を行う
 def input
   print("今は")
   puts $maru==true ? "○の番です\n":"×の番です\n"
@@ -183,16 +186,24 @@ def input
   call_Set(num)
 end
 
+# gameクリア画面の表示
 def clear
   print("winner>")
   puts $maru==true ? "○\n":"×\n"
 end
 
-def gameOver
-  puts("gameover")
+# gameoverの判定と表示
+def gameOver(i)
+  if(i>=9)
+    puts("gameover")
+    return 1
+  else
+    return 0
+  end
+
 end
 
-
+# gameを行う関数
 def game
   i=0
   while(1) do
@@ -203,10 +214,7 @@ def game
       clear()
       break
     end
-    if(i>=9)
-      gameOver()
-      break
-    end
+    break if(gameOver(i)==1)
     $maru=!$maru
   end
 end
