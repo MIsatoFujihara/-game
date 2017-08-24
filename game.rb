@@ -22,27 +22,34 @@ class Input
 end
 
 def output(i,*pos)
-  
+  print(" ")
   j=0
   pos.each do |mark|
-    
     if(mark==1)
-      print("○")
+      print(" ○ ")
     elsif(mark==2)
-      print("×")
+      print(" × ")
     else
-      print("#{index_number(i,j)}")
+      print(" #{index_number(i,j)} ")
    end
-   print("|")
+   if((j+1)%3!=0)
+    print("｜")
+   end
    j+=1
   end
   print("\n")
+  if((i+1)%3!=0)
+    print(" ---＋---＋---\n")
+  else
+    print("\n")
+  end
 end
 
 def call_output
   i=0
-  
+  print("\n")
   $table.each do |elm1, elm2, elm3|
+    #print("   |   |   |\n")
     output(i,elm1, elm2, elm3) 
     i+=1
   end
