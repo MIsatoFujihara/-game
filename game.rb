@@ -193,6 +193,7 @@ def clear
 end
 
 # gameoverの判定と表示
+# 表が埋まっていたらgameover
 def gameOver(i)
   if(i>=9)
     puts("gameover")
@@ -210,12 +211,14 @@ def game
     input()
     call_output()
     i+=1
+    # gameclearの判定を行う
     if(callClear==1)
       clear()
       break
     end
+    # gameoverの判定を行う
     break if(gameOver(i)==1)
-    $maru=!$maru
+    $maru=!$maru # 今の手を反転的に変更
   end
 end
 
