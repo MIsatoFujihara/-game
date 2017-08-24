@@ -20,6 +20,15 @@ def output
   
 end
 
+def game
+  i=0
+  while(i<10)
+    p $maru
+    $maru=!$maru
+    i+=1
+  end
+end
 $table = Array.new(3).map{Array.new(3,0)}
+$maru=true
 puts("○×ゲームを始めます")
-
+game()
