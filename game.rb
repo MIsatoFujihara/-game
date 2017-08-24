@@ -22,7 +22,7 @@ class Set_position
     if(@y>2||@x>2)
       return false
     end
-    if (table[@y][@x]==0)
+    if ($table[@y][@x]==0)
         return true
     else
         return false
@@ -66,7 +66,11 @@ end
 
 def call_Set(num)
   x,y=number_index(num)
-  input=Set_position.new(x,y)
+  pos=Set_position.new(x,y)
+  if (pos.check_position==false)
+    puts("もう一度入力してください")
+    input()
+  end
 end
 
 def input
