@@ -12,7 +12,7 @@ def number_index(num)
   return x,y
 end
 
-class Input
+class Set_position
   def initialize(x, y)
     @x=x
     @y=y
@@ -64,9 +64,9 @@ def call_output
   end
 end
 
-def call_input(num)
+def call_Set(num)
   x,y=number_index(num)
-  input=Input.new(x,y)
+  input=Set_position.new(x,y)
 end
 
 def game
@@ -74,7 +74,7 @@ def game
   while(i<10)
     print("入力>")
     num=gets.to_i
-    call_input(num)
+    call_Set(num)
     #p $maru
     call_output()
     $maru=!$maru
