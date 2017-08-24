@@ -5,7 +5,6 @@ class Input
     @x=x
     @y=y
   end
-
   # その場所におけるか確認
   def check_position
     if (table[@y][@x]==0)
@@ -33,6 +32,7 @@ end
 def game
   i=0
   while(i<10)
+    print("入力>")
     p $maru
     $table.each do |elm1, elm2, elm3|
         output(elm1, elm2, elm3) 
@@ -41,8 +41,10 @@ def game
     i+=1
   end
 end
+
 $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
+x=0
 puts("○×ゲームを始めます")
-
+x=gets.to_i
 game()
