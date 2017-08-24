@@ -1,6 +1,6 @@
 # encoding: UTF-8
 # 入出力関数の作成
-class Input
+class Set_position
   def initialize(x, y)
     @x=x
     @y=y
@@ -55,5 +55,4 @@ $table = Array.new(3).map{Array.new(3,0)}
 $maru=true
 x=0
 puts("○×ゲームを始めます")
-x=gets.to_i
 game()
