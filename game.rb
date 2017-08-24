@@ -15,7 +15,8 @@ class Input
   end
 end
 
-def output(*pos)
+def output(i,*pos)
+  print i
   pos.each do |mark|
     print("|")
     if(mark==1)
@@ -29,14 +30,22 @@ def output(*pos)
   print("|\n")
 end
 
+def call_output
+  i=1
+  print("  1 2 3\n")
+  $table.each do |elm1, elm2, elm3|
+    output(i,elm1, elm2, elm3) 
+    i+=1
+  end
+end
+
+
 def game
   i=0
   while(i<10)
     print("入力>")
     p $maru
-    $table.each do |elm1, elm2, elm3|
-        output(elm1, elm2, elm3) 
-    end
+    call_output()
     $maru=!$maru
     i+=1
   end
