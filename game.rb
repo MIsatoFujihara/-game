@@ -7,8 +7,8 @@ def index_number(x,y)
 end
 
 def number_index(num)
-  x=(num-1)/3
-  y=(num-1)%3
+  x=(num-1)%3
+  y=(num-1)/3
   return x,y
 end
 
@@ -19,9 +19,6 @@ class Set_position
   end
   # その場所におけるか確認
   def check_position
-    if(@y>2||@x>2)
-      return false
-    end
     if ($table[@y][@x]==0)
         return true
     else
@@ -39,7 +36,7 @@ def output(i,*pos)
     elsif(mark==2)
       print(" ×")
     else
-      print(" #{index_number(i,j)} ")
+      print(" #{index_number(j,i)} ")
    end
    if((j+1)%3!=0)
     print("｜")
@@ -67,7 +64,7 @@ end
 def call_Set(num)
   x,y=number_index(num)
   pos=Set_position.new(x,y)
-  if (pos.check_position==false)
+  if (pos.check_position==false||num>9||num<1)
     puts("もう一度入力してください")
     input()
   else
@@ -80,6 +77,8 @@ def call_Set(num)
 end
 
 def input
+  print("今は")
+  puts $maru==true ? "○の番です\n":"×の番です\n"
   print("入力>")
   num=gets.to_i
   call_Set(num)
