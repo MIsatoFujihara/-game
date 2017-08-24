@@ -6,6 +6,8 @@ def index_number(x,y)
   return x+1+(y)*3;
 end
 
+# maruの状態(trueかfalseか)をtableの状態にして返す
+# ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state
   if($maru==true)
     return 1
@@ -14,11 +16,13 @@ def maru_state
   end
 end
 
+# gameのクリア判定を行う
 class ClearCheck
   def initialize(j,i)
     @j=j
     @i=i
   end
+  # 斜め方向にそろっているか確認
   def naname
     clear=0
     while($table[@j][@i]==maru_state()) do
@@ -29,6 +33,7 @@ class ClearCheck
     end
     return 0
   end
+  # 縦方向にそろっているか確認
   def tate
     clear=0
     while($table[@j][@i]==maru_state()) do
@@ -38,6 +43,7 @@ class ClearCheck
     end
     return 0
   end
+  # 横方向にそろっているか確認
   def yoko
     clear=0
     while($table[@j][@i]==maru_state()) do
@@ -51,8 +57,7 @@ end
 
  
 def callClear
-  i=1
- 
+  
   check=ClearCheck.new(0,0)
   if(check.naname()==1||check.yoko()==1||check.tate()==1)
     return 1
@@ -73,7 +78,6 @@ def callClear
   if(check5.tate()==1)
     return 1
   end
-
   return 0
 end
     
@@ -161,6 +165,7 @@ def gameOver
   puts("gameover")
 end
 
+
 def game
   i=0
   while(1) do
@@ -177,7 +182,6 @@ def game
     end
     $maru=!$maru
   end
-  
 end
 
 
