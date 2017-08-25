@@ -6,7 +6,7 @@ require "./set_pos.rb"
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state(maru)
-  if(maru == true)
+  if(maru)
     return 1
   else
     return 2
@@ -103,7 +103,7 @@ end
 # 入力を行う
 def input(maru, table)
   print("今は")
-  puts maru == true ? "○の番です\n":"×の番です\n"
+  puts maru ? "○の番です\n":"×の番です\n"
   print("入力>")
   num = gets.to_i
   # ○または×が置かれた新しいtableが帰ってくる
@@ -113,7 +113,7 @@ end
 # gameクリア画面の表示
 def clear(maru)
   print("winner>")
-  puts maru == true ? "○\n":"×\n"
+  puts maru ? "○\n":"×\n"
 end
 
 # gameoverの判定と表示
