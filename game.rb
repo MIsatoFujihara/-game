@@ -55,8 +55,8 @@ def output(i, j, mark)
     print(" ×")
   else
     print(" #{index_number(j, i)} ")
- end
- print("｜")  if((j + 1) % 3 != 0)
+  end
+  print("｜")  if((j + 1) % 3 != 0)
 end
 
 # tableの行単位に制御
