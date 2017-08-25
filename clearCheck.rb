@@ -10,22 +10,22 @@ class ClearCheck
   def naname
     i,j=@i,@j
     clear=0
-    while(@table[j][i] == maru_state(@maru)) do
+    check_table=[@table[j][i],@table[j+1][i+1],@table[j+2][i+2]]
+    check_table.each do |point|
+      break if(point != maru_state(@maru))
       clear+=1
       return 1 if(clear > 2)
-      i+=1
-      j+=1
     end
     return 0
   end
   def naname2
     i,j=@i,@j
     clear=0
-    while(@table[j][i] == maru_state(@maru)) do
+    check_table=[@table[j][i],@table[j-1][i+1],@table[j-2][i+2]]
+    check_table.each do |point|
+      break if(point != maru_state(@maru))
       clear+=1
       return 1 if(clear > 2)
-      i+=1
-      j-=1
     end
     return 0
   end
@@ -47,6 +47,7 @@ class ClearCheck
   def yoko
     i,j=@i,@j
     clear=0
+    # 表中の確認したい行のみを1行の配列としてcheck_tableに格納
     check_table=@table[j]
     check_table.each do |point|
         break if(point != maru_state(@maru))
