@@ -4,15 +4,12 @@ class SetPosition
     @y = y
     @table = table
     @maru = maru
+    @table[@y][@x] == 0 ? @is_blank = true : @is_blank = false
   end
   # その場所におけるか確認
   # 置けたらtrue，置けなかったらfalseを返す
   def check_position
-    if (@table[@y][@x] == 0)
-      return true
-    else
-      return false
-    end
+    return @is_blank
   end
   # tableに○か×を置く
   def set_position
