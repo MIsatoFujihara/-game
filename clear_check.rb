@@ -1,5 +1,5 @@
 # gameのクリア判定を行う
-class Clear_check
+class ClearCheck
   def initialize(j, i, table, maru)
     @j = j
     @i = i

@@ -17,14 +17,14 @@ end
  # ClearCheckクラスを扱う
 def call_clear(table, maru)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
-  check = Clear_check.new(0, 0, table, maru)
+  check = ClearCheck.new(0, 0, table, maru)
   if(check.naname() == 1||check.yoko() == 1||check.tate() == 1)
     return 1
   end
-  check2 = Clear_check.new(1, 0, table, maru)
-  check3 = Clear_check.new(2, 0, table, maru)
-  check4 = Clear_check.new(0, 1, table, maru)
-  check5 = Clear_check.new(0, 2 ,table ,maru)
+  check2 = ClearCheck.new(1, 0, table, maru)
+  check3 = ClearCheck.new(2, 0, table, maru)
+  check4 = ClearCheck.new(0, 1, table, maru)
+  check5 = ClearCheck.new(0, 2 ,table ,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
   return 1  if(check2.yoko() == 1)
   return 1  if(check3.yoko() == 1||check3.naname2() == 1)
@@ -90,7 +90,7 @@ end
 # 入力に関する制御を行う
 def call_set(num, table, maru)
   x, y = number_index(num)
-  pos = Set_position.new(x, y, table, maru)
+  pos = SetPosition.new(x, y, table, maru)
   if (num > 9||num < 1||pos.check_position == false)
     puts("もう一度入力してください")
     input(maru, table)
