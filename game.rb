@@ -9,22 +9,22 @@ Batsu = 2
 
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
-def maru_state(maru)
-  return maru ? Maru : Batsu
+def player_state(player)
+  return player ? Maru : Batsu
 end
 
  # 3つそろっていたらtrue,そうでなければfalseを返す関数
  # ClearCheckクラスを扱う
-def call_clear(table, maru)
+def call_clear(table, player)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
-  check = ClearCheck.new(0, 0, table, maru)
+  check = ClearCheck.new(0, 0, table, player)
   if check.naname()||check.yoko()||check.tate()
     return true
   end
-  check2 = ClearCheck.new(1, 0, table, maru)
-  check3 = ClearCheck.new(2, 0, table, maru)
-  check4 = ClearCheck.new(0, 1, table, maru)
-  check5 = ClearCheck.new(0, 2 ,table ,maru)
+  check2 = ClearCheck.new(1, 0, table, player)
+  check3 = ClearCheck.new(2, 0, table, player)
+  check4 = ClearCheck.new(0, 1, table, player)
+  check5 = ClearCheck.new(0, 2 ,table, player)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
   return true  if check2.yoko()
   return true  if check3.yoko()||check3.naname2()
@@ -85,12 +85,12 @@ end
 
 # Set_positioinクラスのインスタンスを扱う関数
 # 入力に関する制御を行う
-def call_set(num, table, maru)
+def call_set(num, table, player)
   x, y = number_index(num)
-  pos = SetPosition.new(x, y, table, maru)
+  pos = SetPosition.new(x, y, table, player)
   if  num > 9||num < 1||pos.check_position == false
     puts("もう一度入力してください")
-    input(maru, table)
+    input(player, table)
   else
     # ○または×が置かれた新しいtableが帰ってくる
     pos.set_position
@@ -98,19 +98,19 @@ def call_set(num, table, maru)
 end
 
 # 入力を行う
-def input(maru, table)
+def input(player, table)
   print("今は")
-  puts maru ? "○の番です\n":"×の番です\n"
+  puts player ? "○の番です\n":"×の番です\n"
   print("入力>")
   num = gets.to_i
   # ○または×が置かれた新しいtableが帰ってくる
-  call_set(num, table, maru)
+  call_set(num, table, player)
 end
 
 # gameクリア画面の表示
-def is_clear(maru)
+def is_clear(player)
   print("winner>")
-  puts maru ? "○\n":"×\n"
+  puts player ? "○\n":"×\n"
 end
 
 # gameoverの判定
@@ -124,15 +124,15 @@ def view_gameover
 end
 
 # gameを行う関数
-def game(maru, table)
+def game(player, table)
   i = 0
   loop do
-    table=input(maru, table)
+    table=input(player, table)
     output_columns(table)
     i += 1
     # gameclearの判定を行う
-    if call_clear(table, maru)
-      is_clear(maru)
+    if call_clear(table, player)
+      is_clear(player)
       break
     end
     # gameoverの判定を行う
@@ -140,13 +140,13 @@ def game(maru, table)
       view_gameover()
       break
     end
-    maru = !maru # 今の手を反転的に変更
+    player = !player # 今の手を反転的に変更
   end
 end
 # main
 # tableは何も置いてない時：Empty　○が置いてあるとき：Maru　×が置いてあるとき：Batsu　が格納される
 table = Array.new(3).map{Array.new(3, 0)} 
-maru = true # 今の手が○ならtrue，×ならfalseを示す
+player = true # 今の手が○ならtrue，×ならfalseを示す
 output_columns(table)
 puts("○×ゲームを始めます")
-game(maru, table)
+game(player, table)
