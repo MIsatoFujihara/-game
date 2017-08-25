@@ -3,8 +3,9 @@ require "./clear_check.rb"
 require "./set_pos.rb"
 
 # 定数の設定
-Maru=1
-Batsu=2
+Empty = 0
+Maru = 1
+Batsu = 2
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state(maru)
