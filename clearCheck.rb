@@ -47,11 +47,12 @@ class ClearCheck
   def yoko
     i,j=@i,@j
     clear=0
-    while(@table[j][i] == maru_state(@maru)) do
-      clear+=1
-      return 1 if(clear > 2)
-      i+=1
-    end
+    check_table=@table[j]
+    check_table.each do |point|
+        break if(point != maru_state(@maru))
+        clear+=1
+        return 1 if(clear > 2)
+      end
     return 0
   end
 end
