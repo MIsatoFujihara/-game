@@ -108,14 +108,14 @@ def input(maru, table)
 end
 
 # gameクリア画面の表示
-def clear(maru)
+def is_clear(maru)
   print("winner>")
   puts maru ? "○\n":"×\n"
 end
 
 # gameoverの判定と表示
 # 表が埋まっていたらgameover
-def game_over(i)
+def is_game_over?(i)
   if i >= 9
     puts("gameover")
     return true
@@ -133,11 +133,11 @@ def game(maru, table)
     i += 1
     # gameclearの判定を行う
     if call_clear(table, maru)
-      clear(maru)
+      is_clear(maru)
       break
     end
     # gameoverの判定を行う
-    break if game_over(i)
+    break if is_game_over?(i)
     maru = !maru # 今の手を反転的に変更
   end
 end
