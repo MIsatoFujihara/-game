@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # 入出力関数の作成
 
 require "./clearCheck.rb"
