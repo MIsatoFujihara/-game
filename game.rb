@@ -45,6 +45,7 @@ end
 
 # 各要素の表示
 def output(i, j, mark)
+  (j + 1) % 3 == 0 ? third_column = true : third_row = false
   if(mark == 1)
     print(" ○")
   elsif(mark == 2)
@@ -52,11 +53,12 @@ def output(i, j, mark)
   else
     print(" #{index_number(j, i)} ")
   end
-  print("｜")  if((j + 1) % 3 != 0)
+  print third_column ? "" : "｜"
 end
 
 # tableの行単位に制御
 def output_rows(i, *pos)
+  (i + 1) % 3 == 0 ? third_row = true : third_row = false
   print(" ")
   j = 0
   pos.each do |mark|
@@ -64,12 +66,7 @@ def output_rows(i, *pos)
     j += 1
   end
   print("\n")
-
-  if((i + 1) % 3 != 0)
-    print(" ---＋---＋---\n")
-  else
-    print("\n")
-  end
+  print third_row ? "\n" : " ---＋---＋---\n"
 end
 
 # tableの出力を列ごとに制御
