@@ -96,11 +96,8 @@ end
     
 # 出力される表の位置番号をtableの添え字に変換
 def number_index(num)
-  x=(num)%3-1
-  y=(num-(x+1))/3
-  if(num%3==0)
-    y-=1
-  end
+  x=(num-1)%3 
+  y=(num-1)/3 
   return x,y
 end
 
