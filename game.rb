@@ -154,6 +154,7 @@ def game
 end
 
 # main
+# tableは何も置いてない時：0　○が置いてあるとき：1　×が置いてあるとき：2　が格納される
 $table = Array.new(3).map{Array.new(3,0)}  #グローバル変数
 $maru=true # 今の手が○ならtrue，×ならfalseを示す
 outputColumns()
