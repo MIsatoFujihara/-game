@@ -6,6 +6,7 @@ require "./set_pos.rb"
 Empty = 0
 Maru = 1
 Batsu = 2
+
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state(maru)
@@ -17,7 +18,7 @@ end
 def call_clear(table, maru)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
   check = ClearCheck.new(0, 0, table, maru)
-  if(check.naname() == 1||check.yoko() == 1||check.tate() == 1)
+  if(check.naname()||check.yoko()||check.tate())
     return true
   end
   check2 = ClearCheck.new(1, 0, table, maru)
@@ -25,11 +26,11 @@ def call_clear(table, maru)
   check4 = ClearCheck.new(0, 1, table, maru)
   check5 = ClearCheck.new(0, 2 ,table ,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
-  return true  if(check2.yoko() == 1)
-  return true  if(check3.yoko() == 1||check3.naname2() == 1)
+  return true  if(check2.yoko())
+  return true  if(check3.yoko()||check3.naname2())
   # table[0][1],tanle[0][2]は縦方向にそろっているか調べる
-  return true  if(check4.tate() == 1)
-  return true  if(check5.tate() == 1)
+  return true  if(check4.tate())
+  return true  if(check5.tate())
   # どこもそろっていなかったら0を返す
   return false
 end
@@ -141,7 +142,7 @@ def game(maru, table)
   end
 end
 # main
-# tableは何も置いてない時：0　○が置いてあるとき：1　×が置いてあるとき：2　が格納される
+# tableは何も置いてない時：Empty　○が置いてあるとき：Maru　×が置いてあるとき：Batsu　が格納される
 table = Array.new(3).map{Array.new(3, 0)} 
 maru = true # 今の手が○ならtrue，×ならfalseを示す
 output_columns(table)

@@ -16,9 +16,9 @@ class ClearCheck
       break unless(point == maru_state(@maru))
       clear += 1
       #3つ以上連続してそろっていたらbreak
-      return 1 if(clear >= 3)
+      return true if(clear >= 3)
     end
-    return 0
+    return false
   end
   def naname2
     i, j = @i, @j
@@ -29,9 +29,9 @@ class ClearCheck
       break unless(point == maru_state(@maru))
       clear += 1
       #3つ以上連続してそろっていたらbreak
-      return 1 if(clear >= 3)
+      return true if(clear >= 3)
     end
-    return 0
+    return false
   end
   # 縦方向にそろっているか確認
   def tate
@@ -44,9 +44,9 @@ class ClearCheck
       break unless(point == maru_state(@maru))
       clear += 1
       #3つ以上連続してそろっていたらbreak
-      return 1 if(clear >= 3)
+      return true if(clear >= 3)
     end
-    return 0
+    return false
   end
   # 横方向にそろっているか確認
   def yoko
@@ -58,8 +58,8 @@ class ClearCheck
         break unless(point == maru_state(@maru))
         clear += 1
         #3つ以上連続してそろっていたらbreak
-        return 1 if(clear >= 3)
+        return true if(clear >= 3)
       end
-    return 0
+    return false
   end
 end
