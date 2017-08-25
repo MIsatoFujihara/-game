@@ -56,9 +56,7 @@ def output(i,j,mark)
   else
     print(" #{index_number(j,i)} ")
  end
- if((j+1)%3 != 0)
-  print("｜")
- end
+ print("｜")  if((j+1)%3 != 0)
 end
 
 # tableの行単位に制御
@@ -94,7 +92,7 @@ def call_Set(num,table,maru)
   pos=Set_position.new(x,y,table,maru)
   if (num > 9||num < 1||pos.check_position == false)
     puts("もう一度入力してください")
-    input(table)
+    input(maru,table)
   else
     # ○または×が置かれた新しいtableが帰ってくる
     pos.setPosition
