@@ -6,11 +6,7 @@ require "./set_pos.rb"
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state(maru)
-  if(maru)
-    return 1
-  else
-    return 2
-  end
+  return maru ? 1 : 2
 end
 
  # 3つそろっていたら１,そうでなければ0を返す関数
