@@ -18,7 +18,7 @@ end
 def call_clear(table, maru)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
   check = ClearCheck.new(0, 0, table, maru)
-  if(check.naname()||check.yoko()||check.tate())
+  if check.naname()||check.yoko()||check.tate()
     return true
   end
   check2 = ClearCheck.new(1, 0, table, maru)
@@ -26,11 +26,11 @@ def call_clear(table, maru)
   check4 = ClearCheck.new(0, 1, table, maru)
   check5 = ClearCheck.new(0, 2 ,table ,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
-  return true  if(check2.yoko())
-  return true  if(check3.yoko()||check3.naname2())
+  return true  if check2.yoko()
+  return true  if check3.yoko()||check3.naname2()
   # table[0][1],tanle[0][2]は縦方向にそろっているか調べる
-  return true  if(check4.tate())
-  return true  if(check5.tate())
+  return true  if check4.tate()
+  return true  if check5.tate()
   # どこもそろっていなかったら0を返す
   return false
 end
@@ -50,9 +50,9 @@ end
 # 各要素の表示
 def output(i, j, mark)
   (j + 1) % 3 == 0 ? third_column = true : third_row = false
-  if(mark == Maru)
+  if mark == Maru
     print(" ○")
-  elsif(mark == Batsu)
+  elsif mark == Batsu
     print(" ×")
   else
     print(" #{index_number(j, i)} ")
@@ -88,7 +88,7 @@ end
 def call_set(num, table, maru)
   x, y = number_index(num)
   pos = SetPosition.new(x, y, table, maru)
-  if (num > 9||num < 1||pos.check_position == false)
+  if  num > 9||num < 1||pos.check_position == false
     puts("もう一度入力してください")
     input(maru, table)
   else
@@ -116,7 +116,7 @@ end
 # gameoverの判定と表示
 # 表が埋まっていたらgameover
 def game_over(i)
-  if(i >= 9)
+  if i >= 9
     puts("gameover")
     return true
   else
@@ -132,12 +132,12 @@ def game(maru, table)
     output_columns(table)
     i += 1
     # gameclearの判定を行う
-    if(call_clear(table, maru))
+    if call_clear(table, maru)
       clear(maru)
       break
     end
     # gameoverの判定を行う
-    break if(game_over(i))
+    break if game_over(i)
     maru = !maru # 今の手を反転的に変更
   end
 end
