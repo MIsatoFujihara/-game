@@ -33,10 +33,13 @@ class ClearCheck
   def tate
     i,j=@i,@j
     clear=0
-    while(@table[j][i] == maru_state(@maru)) do
+    @table=@table.transpose
+    # 表中の確認したい列のみを1行の配列としてcheck_tableに格納
+    check_table=@table[i]
+    check_table.each do |point|
+      break if(point != maru_state(@maru))
       clear+=1
       return 1 if(clear > 2)
-      j+=1
     end
     return 0
   end
