@@ -9,26 +9,26 @@ def maru_state(maru)
   return maru ? 1 : 2
 end
 
- # 3つそろっていたら１,そうでなければ0を返す関数
+ # 3つそろっていたらtrue,そうでなければfalseを返す関数
  # ClearCheckクラスを扱う
 def call_clear(table, maru)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
   check = ClearCheck.new(0, 0, table, maru)
   if(check.naname() == 1||check.yoko() == 1||check.tate() == 1)
-    return 1
+    return true
   end
   check2 = ClearCheck.new(1, 0, table, maru)
   check3 = ClearCheck.new(2, 0, table, maru)
   check4 = ClearCheck.new(0, 1, table, maru)
   check5 = ClearCheck.new(0, 2 ,table ,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
-  return 1  if(check2.yoko() == 1)
-  return 1  if(check3.yoko() == 1||check3.naname2() == 1)
+  return true  if(check2.yoko() == 1)
+  return true  if(check3.yoko() == 1||check3.naname2() == 1)
   # table[0][1],tanle[0][2]は縦方向にそろっているか調べる
-  return 1  if(check4.tate() == 1)
-  return 1  if(check5.tate() == 1)
+  return true  if(check4.tate() == 1)
+  return true  if(check5.tate() == 1)
   # どこもそろっていなかったら0を返す
-  return 0
+  return false
 end
     
 # 出力される表の位置番号をtableの添え字に変換
@@ -128,7 +128,7 @@ def game(maru, table)
     output_columns(table)
     i += 1
     # gameclearの判定を行う
-    if(call_clear(table, maru) == 1)
+    if(call_clear(table, maru))
       clear(maru)
       break
     end
