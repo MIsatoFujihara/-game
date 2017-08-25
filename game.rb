@@ -123,7 +123,12 @@ class Set_position
         return false
     end
   end
+  # tableに○か×を置く
+  def setPosition
+    $table[@y][@x]=maru_state()
+  end
 end
+
 # 各要素の表示
 def output(i,j,mark)
   if(mark==1)
@@ -173,7 +178,7 @@ def call_Set(num)
     puts("もう一度入力してください")
     input()
   else
-    $table[y][x]=maru_state()
+    pos.setPosition
   end
 end
 
