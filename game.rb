@@ -1,11 +1,12 @@
-# 入出力関数の作成
-
+# カレントディレクトリにあるファイルをrequire
 require "./clearCheck.rb"
 require "./setPos.rb"
-# maruの状態(trueかfalseか)をtableの状態にして返す
+
+
+# maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state
-  if($maru==true)
+  if($maru == true)
     return 1
   else
     return 2
@@ -17,7 +18,7 @@ end
 def callClear
   # table[0][0]は縦横斜め方向にそろっているかを調べる
   check=ClearCheck.new(0,0)
-  if(check.naname()==1||check.yoko()==1||check.tate()==1)
+  if(check.naname() == 1||check.yoko() == 1||check.tate() == 1)
     return 1
   end
   check2=ClearCheck.new(1,0)
@@ -25,17 +26,17 @@ def callClear
   check4=ClearCheck.new(0,1)
   check5=ClearCheck.new(0,2)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
-  if(check2.yoko()==1)
+  if(check2.yoko() == 1)
     return 1
   end
-  if(check3.yoko()==1||check3.naname2()==1)
+  if(check3.yoko() == 1||check3.naname2() == 1)
     return 1
   end
   # table[0][1],tanle[0][2]は縦方向にそろっているか調べる
-  if(check4.tate()==1)
+  if(check4.tate() == 1)
     return 1
   end
-  if(check5.tate()==1)
+  if(check5.tate() == 1)
     return 1
   end
   # どこもそろっていなかったら0を返す
@@ -56,14 +57,14 @@ end
 
 # 各要素の表示
 def output(i,j,mark)
-  if(mark==1)
+  if(mark == 1)
     print(" ○")
-  elsif(mark==2)
+  elsif(mark == 2)
     print(" ×")
   else
     print(" #{index_number(j,i)} ")
  end
- if((j+1)%3!=0)
+ if((j+1)%3 != 0)
   print("｜")
  end
 end
@@ -77,7 +78,7 @@ def outputRows(i,*pos)
     j+=1
   end
   print("\n")
-  if((i+1)%3!=0)
+  if((i+1)%3 != 0)
     print(" ---＋---＋---\n")
   else
     print("\n")
@@ -99,7 +100,7 @@ end
 def call_Set(num)
   x,y=number_index(num)
   pos=Set_position.new(x,y)
-  if (num>9||num<1||pos.check_position==false)
+  if (num > 9||num < 1||pos.check_position == false)
     puts("もう一度入力してください")
     input()
   else
@@ -110,7 +111,7 @@ end
 # 入力を行う
 def input
   print("今は")
-  puts $maru==true ? "○の番です\n":"×の番です\n"
+  puts $maru == true ? "○の番です\n":"×の番です\n"
   print("入力>")
   num=gets.to_i
   call_Set(num)
@@ -119,13 +120,13 @@ end
 # gameクリア画面の表示
 def clear
   print("winner>")
-  puts $maru==true ? "○\n":"×\n"
+  puts $maru == true ? "○\n":"×\n"
 end
 
 # gameoverの判定と表示
 # 表が埋まっていたらgameover
 def gameOver(i)
-  if(i>=9)
+  if(i >= 9)
     puts("gameover")
     return 1
   else
@@ -142,12 +143,12 @@ def game
     outputColumns()
     i+=1
     # gameclearの判定を行う
-    if(callClear==1)
+    if(callClear == 1)
       clear()
       break
     end
     # gameoverの判定を行う
-    break if(gameOver(i)==1)
+    break if(gameOver(i) == 1)
     $maru=!$maru # 今の手を反転的に変更
   end
 end

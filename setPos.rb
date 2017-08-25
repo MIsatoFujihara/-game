@@ -6,7 +6,7 @@ class Set_position
   # その場所におけるか確認
   # 置けたらtrue，置けなかったらfalseを返す
   def check_position
-    if ($table[@y][@x]==0)
+    if ($table[@y][@x] == 0)
         return true
     else
         return false
