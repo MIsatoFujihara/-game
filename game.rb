@@ -114,9 +114,9 @@ end
 def game_over(i)
   if(i >= 9)
     puts("gameover")
-    return 1
+    return true
   else
-    return 0
+    return false
   end
 end
 
@@ -133,7 +133,7 @@ def game(maru, table)
       break
     end
     # gameoverの判定を行う
-    break if(game_over(i) == 1)
+    break if(game_over(i))
     maru = !maru # 今の手を反転的に変更
   end
 end
