@@ -5,8 +5,8 @@ require "./setPos.rb"
 
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
-def maru_state
-  if($maru == true)
+def maru_state(maru)
+  if(maru == true)
     return 1
   else
     return 2
@@ -15,16 +15,16 @@ end
 
  # 3つそろっていたら１,そうでなければ0を返す関数
  # ClearCheckクラスを扱う
-def callClear
+def callClear(table,maru)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
-  check=ClearCheck.new(0,0)
+  check=ClearCheck.new(0,0,table,maru)
   if(check.naname() == 1||check.yoko() == 1||check.tate() == 1)
     return 1
   end
-  check2=ClearCheck.new(1,0)
-  check3=ClearCheck.new(2,0)
-  check4=ClearCheck.new(0,1)
-  check5=ClearCheck.new(0,2)
+  check2=ClearCheck.new(1,0,table,maru)
+  check3=ClearCheck.new(2,0,table,maru)
+  check4=ClearCheck.new(0,1,table,maru)
+  check5=ClearCheck.new(0,2,table,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
   if(check2.yoko() == 1)
     return 1
@@ -86,10 +86,10 @@ def outputRows(i,*pos)
 end
 
 # tableの出力を列ごとに制御
-def outputColumns
+def outputColumns(table) 
   i=0
   print("\n")
-  $table.each do |elm1, elm2, elm3|
+  table.each do |elm1, elm2, elm3|
     outputRows(i,elm1, elm2, elm3) 
     i+=1
   end
@@ -97,30 +97,32 @@ end
 
 # Set_positioinクラスのインスタンスを扱う関数
 # 入力に関する制御を行う
-def call_Set(num)
+def call_Set(num,table,maru)
   x,y=number_index(num)
-  pos=Set_position.new(x,y)
+  pos=Set_position.new(x,y,table,maru)
   if (num > 9||num < 1||pos.check_position == false)
     puts("もう一度入力してください")
-    input()
+    input(table)
   else
-    pos.setPosition
+    # ○または×が置かれた新しいtableが帰ってくる
+    return pos.setPosition
   end
 end
 
 # 入力を行う
-def input
+def input(maru,table)
   print("今は")
-  puts $maru == true ? "○の番です\n":"×の番です\n"
+  puts maru == true ? "○の番です\n":"×の番です\n"
   print("入力>")
   num=gets.to_i
-  call_Set(num)
+  # ○または×が置かれた新しいtableが帰ってくる
+  return call_Set(num,table,maru)
 end
 
 # gameクリア画面の表示
-def clear
+def clear(maru)
   print("winner>")
-  puts $maru == true ? "○\n":"×\n"
+  puts maru == true ? "○\n":"×\n"
 end
 
 # gameoverの判定と表示
@@ -136,27 +138,27 @@ def gameOver(i)
 end
 
 # gameを行う関数
-def game
+def game(maru,table)
   i=0
   while(1) do
-    input()
-    outputColumns()
+    table=input(maru,table)
+    outputColumns(table)
     i+=1
     # gameclearの判定を行う
-    if(callClear == 1)
-      clear()
+    if(callClear(table,maru) == 1)
+      clear(maru)
       break
     end
     # gameoverの判定を行う
     break if(gameOver(i) == 1)
-    $maru=!$maru # 今の手を反転的に変更
+    maru=!maru # 今の手を反転的に変更
   end
 end
 
 # main
 # tableは何も置いてない時：0　○が置いてあるとき：1　×が置いてあるとき：2　が格納される
-$table = Array.new(3).map{Array.new(3,0)}  #グローバル変数
-$maru=true # 今の手が○ならtrue，×ならfalseを示す
-outputColumns()
+table = Array.new(3).map{Array.new(3,0)} 
+maru=true # 今の手が○ならtrue，×ならfalseを示す
+outputColumns(table)
 puts("○×ゲームを始めます")
-game()
+game(maru,table)

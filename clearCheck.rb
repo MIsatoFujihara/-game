@@ -1,14 +1,16 @@
 # gameのクリア判定を行う
 class ClearCheck
-  def initialize(j,i)
+  def initialize(j,i,table,maru)
     @j=j
     @i=i
+    @table=table
+    @maru=maru
   end
   # 斜め方向にそろっているか確認
   def naname
     i,j=@i,@j
     clear=0
-    while($table[j][i] == maru_state()) do
+    while(@table[j][i] == maru_state(@maru)) do
       clear+=1
       return 1 if(clear > 2)
       i+=1
@@ -19,7 +21,7 @@ class ClearCheck
   def naname2
     i,j=@i,@j
     clear=0
-    while($table[j][i] == maru_state()) do
+    while(@table[j][i] == maru_state(@maru)) do
       clear+=1
       return 1 if(clear > 2)
       i+=1
@@ -31,7 +33,7 @@ class ClearCheck
   def tate
     i,j=@i,@j
     clear=0
-    while($table[j][i] == maru_state()) do
+    while(@table[j][i] == maru_state(@maru)) do
       clear+=1
       return 1 if(clear > 2)
       j+=1
@@ -42,7 +44,7 @@ class ClearCheck
   def yoko
     i,j=@i,@j
     clear=0
-    while($table[j][i] == maru_state()) do
+    while(@table[j][i] == maru_state(@maru)) do
       clear+=1
       return 1 if(clear > 2)
       i+=1
