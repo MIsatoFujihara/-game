@@ -144,7 +144,7 @@ def output(i,j,mark)
 end
 
 # tableの行単位に制御
-def output_loop(i,*pos)
+def outputRows(i,*pos)
   print(" ")
   j=0
   pos.each do |mark|
@@ -160,11 +160,11 @@ def output_loop(i,*pos)
 end
 
 # tableの出力を列ごとに制御
-def call_output
+def outputColumns
   i=0
   print("\n")
   $table.each do |elm1, elm2, elm3|
-    output_loop(i,elm1, elm2, elm3) 
+    outputRows(i,elm1, elm2, elm3) 
     i+=1
   end
 end
@@ -214,7 +214,7 @@ def game
   i=0
   while(1) do
     input()
-    call_output()
+    outputColumns()
     i+=1
     # gameclearの判定を行う
     if(callClear==1)
@@ -230,6 +230,6 @@ end
 # main
 $table = Array.new(3).map{Array.new(3,0)}  #グローバル変数
 $maru=true # 今の手が○ならtrue，×ならfalseを示す
-call_output()
+outputColumns()
 puts("○×ゲームを始めます")
 game()
