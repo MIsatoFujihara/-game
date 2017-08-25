@@ -26,19 +26,11 @@ def callClear(table,maru)
   check4=ClearCheck.new(0,1,table,maru)
   check5=ClearCheck.new(0,2,table,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
-  if(check2.yoko() == 1)
-    return 1
-  end
-  if(check3.yoko() == 1||check3.naname2() == 1)
-    return 1
-  end
+  return 1  if(check2.yoko() == 1)
+  return 1  if(check3.yoko() == 1||check3.naname2() == 1)
   # table[0][1],tanle[0][2]は縦方向にそろっているか調べる
-  if(check4.tate() == 1)
-    return 1
-  end
-  if(check5.tate() == 1)
-    return 1
-  end
+  return 1  if(check4.tate() == 1)
+  return 1  if(check5.tate() == 1)
   # どこもそろっていなかったら0を返す
   return 0
 end
@@ -52,7 +44,7 @@ end
 
 # tableの添え字を出力される表の位置番号に変換
 def index_number(x,y)
-  return x+1+y*3;
+  x+1+y*3;
 end
 
 # 各要素の表示
@@ -105,7 +97,7 @@ def call_Set(num,table,maru)
     input(table)
   else
     # ○または×が置かれた新しいtableが帰ってくる
-    return pos.setPosition
+    pos.setPosition
   end
 end
 
@@ -116,7 +108,7 @@ def input(maru,table)
   print("入力>")
   num=gets.to_i
   # ○または×が置かれた新しいtableが帰ってくる
-  return call_Set(num,table,maru)
+  call_Set(num,table,maru)
 end
 
 # gameクリア画面の表示
@@ -134,7 +126,6 @@ def gameOver(i)
   else
     return 0
   end
-
 end
 
 # gameを行う関数
