@@ -140,7 +140,7 @@ end
 # gameを行う関数
 def game(maru,table)
   i=0
-  while(1) do
+  loop do
     table=input(maru,table)
     outputColumns(table)
     i+=1
