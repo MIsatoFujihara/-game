@@ -15,7 +15,7 @@ class Set_position
     end
   end
   # tableに○か×を置く
-  def setPosition
+  def set_position
     @table[@y][@x]=maru_state(@maru)
     @table
   end

@@ -1,6 +1,6 @@
 # カレントディレクトリにあるファイルをrequire
-require "./clearCheck.rb"
-require "./setPos.rb"
+require "./clear_check.rb"
+require "./set_pos.rb"
 
 
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
@@ -15,16 +15,16 @@ end
 
  # 3つそろっていたら１,そうでなければ0を返す関数
  # ClearCheckクラスを扱う
-def callClear(table,maru)
+def call_clear(table,maru)
   # table[0][0]は縦横斜め方向にそろっているかを調べる
-  check=ClearCheck.new(0,0,table,maru)
+  check=Clear_check.new(0,0,table,maru)
   if(check.naname() == 1||check.yoko() == 1||check.tate() == 1)
     return 1
   end
-  check2=ClearCheck.new(1,0,table,maru)
-  check3=ClearCheck.new(2,0,table,maru)
-  check4=ClearCheck.new(0,1,table,maru)
-  check5=ClearCheck.new(0,2,table,maru)
+  check2=Clear_check.new(1,0,table,maru)
+  check3=Clear_check.new(2,0,table,maru)
+  check4=Clear_check.new(0,1,table,maru)
+  check5=Clear_check.new(0,2,table,maru)
   # table[1][0],table[2][0]は横方向にそろっているか調べる
   return 1  if(check2.yoko() == 1)
   return 1  if(check3.yoko() == 1||check3.naname2() == 1)
@@ -60,7 +60,7 @@ def output(i,j,mark)
 end
 
 # tableの行単位に制御
-def outputRows(i,*pos)
+def output_rows(i,*pos)
   print(" ")
   j=0
   pos.each do |mark|
@@ -76,18 +76,18 @@ def outputRows(i,*pos)
 end
 
 # tableの出力を列ごとに制御
-def outputColumns(table) 
+def output_columns(table) 
   i=0
   print("\n")
   table.each do |elm1, elm2, elm3|
-    outputRows(i,elm1, elm2, elm3) 
+    output_rows(i,elm1, elm2, elm3) 
     i+=1
   end
 end
 
 # Set_positioinクラスのインスタンスを扱う関数
 # 入力に関する制御を行う
-def call_Set(num,table,maru)
+def call_set(num,table,maru)
   x,y=number_index(num)
   pos=Set_position.new(x,y,table,maru)
   if (num > 9||num < 1||pos.check_position == false)
@@ -95,7 +95,7 @@ def call_Set(num,table,maru)
     input(maru,table)
   else
     # ○または×が置かれた新しいtableが帰ってくる
-    pos.setPosition
+    pos.set_position
   end
 end
 
@@ -106,7 +106,7 @@ def input(maru,table)
   print("入力>")
   num=gets.to_i
   # ○または×が置かれた新しいtableが帰ってくる
-  call_Set(num,table,maru)
+  call_set(num,table,maru)
 end
 
 # gameクリア画面の表示
@@ -117,7 +117,7 @@ end
 
 # gameoverの判定と表示
 # 表が埋まっていたらgameover
-def gameOver(i)
+def game_over(i)
   if(i >= 9)
     puts("gameover")
     return 1
@@ -131,15 +131,15 @@ def game(maru,table)
   i=0
   loop do
     table=input(maru,table)
-    outputColumns(table)
+    output_columns(table)
     i+=1
     # gameclearの判定を行う
-    if(callClear(table,maru) == 1)
+    if(call_clear(table,maru) == 1)
       clear(maru)
       break
     end
     # gameoverの判定を行う
-    break if(gameOver(i) == 1)
+    break if(game_over(i) == 1)
     maru=!maru # 今の手を反転的に変更
   end
 end
@@ -148,6 +148,6 @@ end
 # tableは何も置いてない時：0　○が置いてあるとき：1　×が置いてあるとき：2　が格納される
 table = Array.new(3).map{Array.new(3,0)} 
 maru=true # 今の手が○ならtrue，×ならfalseを示す
-outputColumns(table)
+output_columns(table)
 puts("○×ゲームを始めます")
 game(maru,table)
