@@ -9,9 +9,9 @@ class Set_position
   # 置けたらtrue，置けなかったらfalseを返す
   def check_position
     if (@table[@y][@x] == 0)
-        true
+      return true
     else
-    　　false
+      return false
     end
   end
   # tableに○か×を置く
