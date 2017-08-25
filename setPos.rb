@@ -9,14 +9,14 @@ class Set_position
   # 置けたらtrue，置けなかったらfalseを返す
   def check_position
     if (@table[@y][@x] == 0)
-        return true
+        true
     else
-        return false
+    　　false
     end
   end
   # tableに○か×を置く
   def setPosition
     @table[@y][@x]=maru_state(@maru)
-    return @table
+    @table
   end
 end
