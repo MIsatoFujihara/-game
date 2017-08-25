@@ -2,11 +2,13 @@
 require "./clear_check.rb"
 require "./set_pos.rb"
 
-
+# 定数の設定
+Maru=1
+Batsu=2
 # maruの状態(trueかfalseか)をtableの状態(int型)にして返す
 # ○がおかれていたら表の状態は1,×がおかれていたら表の状態は2
 def maru_state(maru)
-  return maru ? 1 : 2
+  return maru ? Maru : Batsu
 end
 
  # 3つそろっていたらtrue,そうでなければfalseを返す関数
@@ -46,9 +48,9 @@ end
 # 各要素の表示
 def output(i, j, mark)
   (j + 1) % 3 == 0 ? third_column = true : third_row = false
-  if(mark == 1)
+  if(mark == Maru)
     print(" ○")
-  elsif(mark == 2)
+  elsif(mark == Batsu)
     print(" ×")
   else
     print(" #{index_number(j, i)} ")
@@ -137,7 +139,6 @@ def game(maru, table)
     maru = !maru # 今の手を反転的に変更
   end
 end
-
 # main
 # tableは何も置いてない時：0　○が置いてあるとき：1　×が置いてあるとき：2　が格納される
 table = Array.new(3).map{Array.new(3, 0)} 
